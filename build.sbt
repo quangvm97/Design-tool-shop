@@ -1,5 +1,4 @@
 name := """DuAn2018"""
-organization := "com.example"
 
 version := "1.0-SNAPSHOT"
 

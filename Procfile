@@ -1,2 +1,2 @@
-web: target/universal/stage/bin/DuAn2018 -Dhttp.port=${PORT}
-console: target/universal/stage/bin/DuAn2018 -main scala.tools.nsc.MainGenericRunner -usejavacp
+web: application/target/universal/stage/bin/application -Dhttp.port=${PORT}
+console: application/target/universal/stage/bin/application -main scala.tools.nsc.MainGenericRunner -usejavacp
