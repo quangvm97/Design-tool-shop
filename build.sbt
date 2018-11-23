@@ -1,9 +1,11 @@
 name := """DuAn2018"""
 
 version := "1.0-SNAPSHOT"
+import com.typesafe.sbt.SbtGit._
 
 lazy val commonSettings = Seq(
   scalaVersion := "2.12.2",
+  herokuAppName in Compile := "design-tool-shop",
   libraryDependencies ++= Seq(
     guice,
     jdbc,
@@ -18,6 +20,12 @@ lazy val commonSettings = Seq(
     "org.mindrot" % "jbcrypt" % "0.3m"
   )
 )
+
+//herokuAppName in Compile := Map(
+//  "testing"    -> "myapp-testing",
+//  "staging"    -> "myapp-staging",
+//  "production" -> "myapp"
+//).getOrElse(git.gitCurrentBranch.value, "myapp-dev")
 
 
 lazy val root = (project in file("."))
