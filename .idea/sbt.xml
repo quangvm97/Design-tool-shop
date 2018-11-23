@@ -8,11 +8,8 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/application" />
-            <option value="$PROJECT_DIR$/application/project" />
             <option value="$PROJECT_DIR$/domain" />
-            <option value="$PROJECT_DIR$/domain/project" />
             <option value="$PROJECT_DIR$/infra" />
-            <option value="$PROJECT_DIR$/infra/project" />
             <option value="$PROJECT_DIR$/project" />
           </set>
         </option>
