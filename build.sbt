@@ -18,7 +18,10 @@ lazy val commonSettings = Seq(
     "ch.qos.logback" % "logback-classic" % "1.2.3",
     specs2 % Test,
     "org.mindrot" % "jbcrypt" % "0.3m",
-    "org.postgresql" % "postgresql" % "9.4-1201-jdbc41"
+    "org.postgresql" % "postgresql" % "9.4-1201-jdbc41",
+    "javax.xml.bind" % "jaxb-api" % "2.1" ,
+    jdbc
+
   )
 )
 
