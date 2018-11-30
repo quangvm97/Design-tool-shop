@@ -20,17 +20,10 @@ lazy val commonSettings = Seq(
     "org.mindrot" % "jbcrypt" % "0.3m",
     "org.postgresql" % "postgresql" % "9.4-1201-jdbc41",
     "javax.xml.bind" % "jaxb-api" % "2.1" ,
-    jdbc
+    "org.joda" % "joda-convert" % "2.1.1"
 
   )
 )
-
-//herokuAppName in Compile := Map(
-//  "testing"    -> "myapp-testing",
-//  "staging"    -> "myapp-staging",
-//  "production" -> "myapp"
-//).getOrElse(git.gitCurrentBranch.value, "myapp-dev")
-
 
 lazy val root = (project in file("."))
   .aggregate(application, domain, infra)
