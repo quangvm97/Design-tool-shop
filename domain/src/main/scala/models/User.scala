@@ -1,5 +1,8 @@
 package models
 
-case class UserId(value: Long)
+import common.{UserBase, UserId}
 
-case class User(userId: UserId, name: String, email: String, password: String)
+
+
+case class User(id: UserId, name: String, email: String, passwordEncrypt: String) extends UserBase {
+}

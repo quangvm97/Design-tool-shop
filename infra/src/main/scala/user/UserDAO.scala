@@ -1,4 +1,4 @@
-package User
+package user
 
 import common.AbstractDao
 import scalikejdbc._
@@ -15,10 +15,13 @@ class UserDAO extends AbstractDao[UserRecord]{
   val column = UserRecord.column
   implicit val session: DBSession = AutoSession
 
-  def getUserByEmail(email: String): Try[Option[UserRecord]] = Try {
+  def getUserByEmail(email: String): Try[UserRecord] = Try {
     withSQL {
       select.from(UserRecord as u).where.eq(u.email, email)
-    }.map(UserRecord(u)).single().apply()
+    }.map(UserRecord(u)).single().apply() match {
+      case Some(record) => record
+      case None => throw new Exception("Couldn't find user with email: " + email)
+    }
   }
 
   override def findAll: Try[Seq[UserRecord]] = ???

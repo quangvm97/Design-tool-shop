@@ -1,10 +1,29 @@
 package models
 
-import User.{UserDAO, UserDao}
+import java.util.UUID
+
 import com.google.inject.Inject
-import common.AbstractUserRepository
+import common.{AbstractUserRepository, UserId}
+import models.User
+import user.{UserDAO, UserRecord}
 
-class UserRepository @Inject()(userDao: UserDAO
-                              ) extends AbstractUserRepository{
+import scala.util.Try
 
+class UserRepository @Inject() (userDao: UserDAO) extends AbstractUserRepository[User, UserRecord]{
+  val dao = userDao
+
+  def findByEmail(accountId: String): Try[User] =
+    dao.getUserByEmail(accountId).map(record2Entity)
+
+  def record2Entity(record: UserRecord): User = {
+    User(
+      id = UserId(record.id),
+      name = record.name,
+      email = record.email,
+      passwordEncrypt = record.password)
+  }
+
+  override def findByAccountIdString(accountIdString: String): Try[User] = ???
+
+  override def entity2Record(entity: User): UserRecord = ???
 }

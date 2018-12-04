@@ -1,4 +1,4 @@
-package User
+package user
 
 import scalikejdbc._
 import org.joda.time.DateTime
@@ -10,7 +10,7 @@ case class UserRecord(
   password: String)
 
 object UserRecord extends SQLSyntaxSupport[UserRecord] {
-  override val tableName = "User"
+  override val tableName = "user"
 
   def apply(c: SyntaxProvider[UserRecord])(rs: WrappedResultSet): UserRecord = apply(c.resultName)(rs)
 

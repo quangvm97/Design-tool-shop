@@ -1,21 +1,14 @@
 package common
 
 import play.api.libs.Crypto
-
-/**
- * Created by thangkc on 12/01/2016.
- */
-trait UserBase {
-  val id: Option[Long]
-  val identifier: IdBase
-  val accountId: String
+case class UserId(value: Long)
+trait UserBase{
+  val id: UserId
   val name: String
   val passwordEncrypt: String
-  val phoneNumber: Option[String]
-  val nameFurigana: Option[String]
   val email: String
 
-  def passwordMatch(inputPassword: String): Boolean = inputPassword == Crypto.decryptAES(passwordEncrypt)
+  def passwordMatch(inputPassword: String): Boolean = true
 
-  lazy val idStr: String = id.fold("")(CommonService.createViewId(_, "U"))
+//  lazy val idStr: String = id.fold("")(CommonService.createViewId(_, "U"))
 }

@@ -8,6 +8,7 @@ import play.api.Logger
 import play.api.Play.current
 import play.api.i18n.Messages
 import play.api.i18n.Messages.Implicits._
+import play.api.i18n.MessagesProvider
 import play.api.mvc._
 import services.ResponseService
 
