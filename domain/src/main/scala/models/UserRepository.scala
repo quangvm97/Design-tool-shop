@@ -3,13 +3,13 @@ package models
 import java.util.UUID
 
 import com.google.inject.Inject
-import common.{AbstractUserRepository, UserId}
+import common.{ AbstractUserRepository, UserId }
 import models.User
-import user.{UserDAO, UserRecord}
+import user.{ UserDAO, UserRecord }
 
 import scala.util.Try
 
-class UserRepository @Inject() (userDao: UserDAO) extends AbstractUserRepository[User, UserRecord]{
+class UserRepository @Inject() (userDao: UserDAO) extends AbstractUserRepository[User, UserRecord] {
   val dao = userDao
 
   def findByEmail(accountId: String): Try[User] =

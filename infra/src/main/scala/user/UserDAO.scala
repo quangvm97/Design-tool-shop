@@ -9,7 +9,7 @@ import scala.util.Try
  * Created by thangkc on 17/12/2015.
  */
 
-class UserDAO extends AbstractDao[UserRecord]{
+class UserDAO extends AbstractDao[UserRecord] {
 
   val u = UserRecord.syntax("u")
   val column = UserRecord.column

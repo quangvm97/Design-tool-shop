@@ -2,7 +2,7 @@ package common
 
 import play.api.libs.Crypto
 case class UserId(value: Long)
-trait UserBase{
+trait UserBase {
   val id: UserId
   val name: String
   val passwordEncrypt: String
@@ -10,5 +10,5 @@ trait UserBase{
 
   def passwordMatch(inputPassword: String): Boolean = true
 
-//  lazy val idStr: String = id.fold("")(CommonService.createViewId(_, "U"))
+  //  lazy val idStr: String = id.fold("")(CommonService.createViewId(_, "U"))
 }

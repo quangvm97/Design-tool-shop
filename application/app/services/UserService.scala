@@ -1,10 +1,10 @@
 package services
 
 import com.google.inject.Inject
-import models.{User, UserRepository}
-import play.api.libs.json.{JsObject, JsString}
+import models.{ User, UserRepository }
+import play.api.libs.json.{ JsObject, JsString }
 
-class UserService{
+class UserService {
   def toJson(user: User): JsObject = JsObject(Seq(
     // format: OFF
     "id" -> JsString(user.id.value.toString()),
