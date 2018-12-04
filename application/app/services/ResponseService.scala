@@ -13,7 +13,7 @@ object ResponseService {
 
     (returnEmptyData, data.isEmpty) match {
       case (false, true) =>
-      case _             => responseJs += ("data", JsArray(data))
+      case _ => responseJs += ("data", JsArray(data))
     }
 
     responseJs
