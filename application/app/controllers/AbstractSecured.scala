@@ -19,21 +19,21 @@ import scala.util.Success
 abstract class AbstractSecured[E, R] @Inject() (userRepository: AbstractUserRepository[E, R]) extends Controller {
 
   /**
-    * Retrieve the connected user email.
-    */
+   * Retrieve the connected user email.
+   */
   private def username(request: RequestHeader) = request.session.get(Security.username)
 
   /**
-    * Redirect to login if the user in not authorized.
-    */
-  private def onUnauthorized(request: RequestHeader) = Ok(ResponseService.unAuthorized(Messages("please.login.to.continue"))).withNewSession
+   * Redirect to login if the user in not authorized.
+   */
+  private def onUnauthorized(request: RequestHeader) = Ok(ResponseService.unAuthorized()).withNewSession
 
   def withoutAuth(f: Request[AnyContent] => Result): Action[AnyContent] = Action(implicit request =>
     f(request).addingToSession("userTime" -> new Date().getTime.toString))
 
   /**
-    * base authenticated users
-    */
+   * base authenticated users
+   */
   def withAuth(f: => String => Request[AnyContent] => Result) = Security.Authenticated(username, onUnauthorized) {
     user => Action(request => f(user)(request))
   }
@@ -43,15 +43,15 @@ abstract class AbstractSecured[E, R] @Inject() (userRepository: AbstractUserRepo
   }
 
   /**
-    * base authenticated users with body parser.
-    */
+   * base authenticated users with body parser.
+   */
   def withAuth[A](bp: BodyParser[A])(f: => String => Request[A] => Result) = Security.Authenticated(username, onUnauthorized) {
     accountId => Action(bp)(request => f(accountId)(request))
   }
 
   /**
-    * Action for authenticated users.
-    */
+   * Action for authenticated users.
+   */
   def isAuthenticated(f: => E => Request[AnyContent] => Result) = withAuth { accountId => implicit request =>
     userRepository.findByAccountIdString(accountId) match {
       case Success(user) =>
@@ -71,8 +71,8 @@ abstract class AbstractSecured[E, R] @Inject() (userRepository: AbstractUserRepo
   }
 
   /**
-    * Action for authenticated users with body parser.
-    */
+   * Action for authenticated users with body parser.
+   */
   def isAuthenticated[A](bp: BodyParser[A])(f: => E => Request[A] => Result) = withAuth(bp) { accountId => implicit request =>
     userRepository.findByAccountIdString(accountId) match {
       case Success(user) =>

@@ -4,7 +4,7 @@ package common
  * Created by thangkc on 14/12/2015.
  */
 
-import scala.util.{Failure, Try}
+import scala.util.{ Failure, Try }
 
 abstract class AbstractRepository[E, R] {
 
