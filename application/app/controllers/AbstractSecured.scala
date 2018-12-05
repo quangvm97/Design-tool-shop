@@ -4,11 +4,7 @@ import java.util.Date
 
 import com.google.inject.Inject
 import common.AbstractUserRepository
-import play.api.Logger
-import play.api.Play.current
-import play.api.i18n.Messages
-import play.api.i18n.Messages.Implicits._
-import play.api.i18n.MessagesProvider
+import play.api.i18n.{ I18nSupport }
 import play.api.mvc._
 import services.ResponseService
 
@@ -16,7 +12,7 @@ import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.Future
 import scala.util.Success
 
-abstract class AbstractSecured[E, R] @Inject() (userRepository: AbstractUserRepository[E, R]) extends Controller {
+abstract class AbstractSecured[E, R] @Inject() (userRepository: AbstractUserRepository[E, R], cc: ControllerComponents) extends AbstractController(cc) with I18nSupport {
 
   /**
    * Retrieve the connected user email.

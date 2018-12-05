@@ -5,16 +5,15 @@ import com.google.inject.Inject
 import forms.login.LoginFormFactory
 import models.UserRepository
 import services.{ ResponseService, UserService }
-import play.api.Play.current
 import play.api.i18n.Messages
-import play.api.i18n.Messages.Implicits._
-import play.api.mvc.{ Action, AnyContent, Security }
+import play.api.mvc.{ Action, AnyContent, ControllerComponents, Security }
 
 import scala.util.{ Failure, Success }
 
 class AuthController @Inject() (
   userRepository: UserRepository,
-  userService: UserService) extends AbstractSecured(userRepository) {
+  userService: UserService,
+  cc: ControllerComponents) extends AbstractSecured(userRepository, cc) {
   def login: Action[AnyContent] = Action { implicit request =>
     LoginFormFactory.userLoginForm.bindFromRequest.fold(
       errors => Ok(ResponseService.badRequest(Some(errors.errorsAsJson))),
