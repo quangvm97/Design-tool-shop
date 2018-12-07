@@ -13,15 +13,22 @@ class UserDAO extends AbstractDao[UserRecord] {
 
   val u = UserRecord.syntax("u")
   val column = UserRecord.column
-  implicit val session: DBSession = AutoSession
+  //  implicit val session: DBSession = AutoSession
 
-  def getUserByEmail(email: String): Try[UserRecord] = Try {
-    withSQL {
-      select.from(UserRecord as u).where.eq(u.email, email)
-    }.map(UserRecord(u)).single().apply() match {
-      case Some(record) => record
-      case None => throw new Exception("Couldn't find user with email: " + email)
-    }
+  def getUserByEmail(email: String)(implicit s: DBSession = AutoSession): Try[UserRecord] = Try {
+    sql"select id, name, email, password from myapp.user where email = ${email}"
+      .map(u => UserRecord(u)).single().apply().getOrElse(throw new Exception("Couldn't find user with id: " + email))
+  }
+
+  def getOptionUserByEmail(email: String)(implicit s: DBSession = AutoSession): Try[Option[UserRecord]] = Try {
+    sql"select id, name, email, password from myapp.user where email = ${email}"
+      .map(u => UserRecord(u)).single().apply()
+  }
+
+  def save(user: UserRecord)(implicit s: DBSession = AutoSession): Try[UserRecord] = Try {
+    val id = sql"INSERT INTO myapp.user (name, email, password) VALUES (${user.name} ,${user.email}, ${user.password})"
+      .updateAndReturnGeneratedKey().apply().toInt
+    user.copy(id = id)
   }
 
   override def findAll: Try[Seq[UserRecord]] = ???

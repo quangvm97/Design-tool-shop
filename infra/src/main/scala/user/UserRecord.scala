@@ -12,11 +12,10 @@ case class UserRecord(
 object UserRecord extends SQLSyntaxSupport[UserRecord] {
   override val tableName = "user"
 
-  def apply(c: SyntaxProvider[UserRecord])(rs: WrappedResultSet): UserRecord = apply(c.resultName)(rs)
-
-  def apply(c: ResultName[UserRecord])(rs: WrappedResultSet): UserRecord = UserRecord(
-    id = rs.long(c.id),
-    name = rs.string(c.name),
-    email = rs.string(c.email),
-    password = rs.string(c.password))
+  def apply(c: SyntaxProvider[UserRecord])(rs: WrappedResultSet): UserRecord = apply(rs)
+  def apply(rs: WrappedResultSet): UserRecord = UserRecord(
+    id = rs.long("id"),
+    name = rs.string("name"),
+    email = rs.string("email"),
+    password = rs.string("password"))
 }
