@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<module external.linked.project.id="application [file:/Users/quangvm/IdeaProjects/du%20an%202018/Design-tool-shop/]" external.linked.project.path="$MODULE_DIR$/../../application" external.root.project.path="$MODULE_DIR$/../.." external.system.id="SBT" type="JAVA_MODULE" version="4">
-  <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_11">
+<module external.linked.project.id="application [file:/home/backupuser/Downloads/btlduan/]" external.linked.project.path="$MODULE_DIR$/../../application" external.root.project.path="$MODULE_DIR$/../.." external.system.id="SBT" type="JAVA_MODULE" version="4">
+  <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_10">
     <output url="file://$MODULE_DIR$/../../application/target/scala-2.12/classes" />
     <output-test url="file://$MODULE_DIR$/../../application/target/scala-2.12/test-classes" />
     <exclude-output />
@@ -22,9 +22,6 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="domain" exported="" />
-    <orderEntry type="library" name="sbt: javax.xml.stream:stax-api:1.0-2:jar" level="project" />
-    <orderEntry type="library" name="sbt: javax.xml.bind:jaxb-api:2.1:jar" level="project" />
-    <orderEntry type="library" name="sbt: javax.activation:activation:1.1:jar" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="sbt: org.scala-lang:scala-compiler:2.12.2:jar" level="project" />
     <orderEntry type="module" module-name="infra" exported="" />
     <orderEntry type="library" name="sbt: aopalliance:aopalliance:1.0:jar" level="project" />
@@ -167,6 +164,5 @@
     <orderEntry type="library" scope="TEST" name="sbt: xalan:xalan:2.7.2:jar" level="project" />
     <orderEntry type="library" scope="TEST" name="sbt: xerces:xercesImpl:2.11.0:jar" level="project" />
     <orderEntry type="library" scope="TEST" name="sbt: xml-apis:xml-apis:1.4.01:jar" level="project" />
-    <orderEntry type="library" name="sbt: org.postgresql:postgresql:9.4-1201-jdbc41:jar" level="project" />
   </component>
 </module>
