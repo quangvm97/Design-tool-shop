@@ -21,7 +21,6 @@ lazy val commonSettings = Seq(
     "org.postgresql" % "postgresql" % "9.4-1201-jdbc41",
     "javax.xml.bind" % "jaxb-api" % "2.1" ,
     "org.joda" % "joda-convert" % "2.1.1"
-
   )
 )
 
