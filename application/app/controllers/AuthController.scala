@@ -32,7 +32,7 @@ class AuthController @Inject() (
           //TODO: when create account will encode password
           //if (BCrypt.checkpw(formData.password,user.passwordEncrypt))
           if (formData.password == user.passwordEncrypt)
-            Ok(ResponseService.success(data = Seq(userService.toJson(user))))
+            Ok(ResponseService.success(data = userService.toJson(user)))
               .withSession(Security.username -> user.email)
           else
             Ok(ResponseService.badRequest("password", Messages("user.invalid.password")))
