@@ -19,3 +19,5 @@ POST    /api/authenticate               controllers.AuthController.login()
 POST    /api/user                       controllers.AuthController.create()
 
 DELETE  /api/logout                     controllers.AuthController.logout()
+
+GET     /api/product                    controllers.ProductController.findAll()
