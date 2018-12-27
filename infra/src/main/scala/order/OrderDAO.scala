@@ -1,15 +1,18 @@
 package order
 
 import common.AbstractDao
-import scalikejdbc.{AutoSession, DBSession}
+import scalikejdbc._
 
 import scala.util.Try
 
-class OrderDAO extends AbstractDao{
+class OrderDAO extends AbstractDao {
 
-  def store(order: OrderRecord)(implicit s: DBSession = AutoSession):Try[OrderRecord] = Try{
-    val id = sql"INSERT INTO myapp.order (user_id, name_receiver, number_phone, address, created_at, total, product_id, status, number) VALUES (${order.userId} ,${order.nameReciver}, ${order.numberPhone},${order.address}, ${order.createdAt},${order.total}, ${order.total}, ${order.productId}, ${order.status}, ${order.number})"
+  def store(order: OrderRecord)(implicit s: DBSession = AutoSession): Try[OrderRecord] = Try {
+    print(order.userId + " " + order.productId + " " + order.status + " " + order.number)
+
+    val id = sql"INSERT INTO myapp.order (user_id, product_id, status, number) VALUES (${order.userId}, ${order.productId}, ${order.status}, ${order.number})"
       .updateAndReturnGeneratedKey().apply().toInt
+    print(id)
     order.copy(id = id)
   }
 

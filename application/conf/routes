@@ -19,3 +19,8 @@ POST    /api/authenticate               controllers.AuthController.login()
 POST    /api/user                       controllers.AuthController.create()
 
 DELETE  /api/logout                     controllers.AuthController.logout()
+
+#Order
+
++nocsrf
+POST    /api/order                  controllers.OrderController.saveItemToCart()

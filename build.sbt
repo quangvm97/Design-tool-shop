@@ -20,7 +20,6 @@ lazy val commonSettings = Seq(
     "org.mindrot" % "jbcrypt" % "0.3m",
     "org.postgresql" % "postgresql" % "9.4-1201-jdbc41",
     "javax.xml.bind" % "jaxb-api" % "2.1" ,
-    "org.joda" % "joda-convert" % "2.1.1",
     "org.scalikejdbc" %% "scalikejdbc-joda-time" % "3.3.1"
   )
 )

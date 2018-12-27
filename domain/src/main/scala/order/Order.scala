@@ -17,7 +17,7 @@ case class Order(
                 userId: Long,
                 receiver: Receiver,
                 createdAt: DateTime,
-                total: Long,
+                price: Long,
                 productId: Long,
                 status: OrderStatus.Value,
                 number: Long
