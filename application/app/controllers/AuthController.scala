@@ -21,7 +21,7 @@ class AuthController @Inject() (
   userRepository: UserRepository,
   userService: UserService,
   cc: ControllerComponents) extends AbstractSecured(userRepository, cc) {
-
+  DBs.setupAll()
   def login: Action[AnyContent] = Action { implicit request =>
     LoginFormFactory.userLoginForm.bindFromRequest.fold(
       errors => {
