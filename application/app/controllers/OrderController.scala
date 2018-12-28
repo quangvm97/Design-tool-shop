@@ -43,5 +43,12 @@ class OrderController @Inject() (cc: ControllerComponents, orderRepository: Orde
 
       })
   }
+
+  def payTotal(id:Int) = Action { implicit request =>
+    var listOrder = orderRepository.findOrderDrafByUserId(id).get
+    var total = 0L
+    listOrder.foreach(order => total = total + (order.price + order.number))
+    Ok(ResponseService.success(data = Seq(listOrder.foreach(order => orderService.toJson(order)))))
+  }
 }
 

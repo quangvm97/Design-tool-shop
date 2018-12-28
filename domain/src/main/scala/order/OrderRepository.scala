@@ -13,6 +13,10 @@ class OrderRepository @Inject() (orderDAO: OrderDAO) {
     dao.store(entity2Record(newItem)).map(record2Entity)
   }
 
+  def findOrderDrafByUserId(userId: Int) : Try[Seq[Order]] = Try{
+    dao.findOrderDraftByUserId(userId).get.map(record2Entity)
+  }
+
   def record2Entity(record: OrderRecord): Order = {
     Order(
       id = record.id,

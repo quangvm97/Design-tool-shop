@@ -22,16 +22,16 @@ case class OrderRecord(
 object OrderRecord extends SQLSyntaxSupport[OrderRecord] {
   override val tableName = "order"
 
-  def apply(c: SyntaxProvider[OrderRecord])(rs: WrappedResultSet): OrderRecord = apply(c.resultName)(rs)
-  def apply(c: ResultName[OrderRecord])(rs: WrappedResultSet): OrderRecord = OrderRecord(
-    id = rs.long(c.id),
-    userId = rs.long(c.userId),
-    nameReciver = rs.string(c.nameReciver),
-    numberPhone = rs.string(c.numberPhone),
-    address = rs.string(c.numberPhone),
-    createdAt = rs.get[DateTime](c.createdAt),
-    price = rs.long(c.price),
-    productId = rs.long(c.productId),
-    status = rs.string(c.status),
-    number = rs.long(c.number))
+  def apply(c: SyntaxProvider[OrderRecord])(rs: WrappedResultSet): OrderRecord = apply(rs)
+  def apply(rs: WrappedResultSet): OrderRecord = OrderRecord(
+    id = rs.long("id"),
+    userId = rs.long("user_id"),
+    nameReciver = rs.string("name_receiver"),
+    numberPhone = rs.string("number_phone"),
+    address = rs.string("address"),
+    createdAt = rs.get[DateTime]("created_at"),
+    price = rs.long("price"),
+    productId = rs.long("product_id"),
+    status = rs.string("status"),
+    number = rs.long("number"))
 }
