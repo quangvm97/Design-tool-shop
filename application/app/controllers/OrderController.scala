@@ -58,6 +58,18 @@ class OrderController @Inject() (cc: ControllerComponents, orderRepository: Orde
     }
   }
 
+  def confirmBuy(userId: Long) = Action { implicit request =>
+    orderRepository.findOrderDrafByUserId(userId) match {
+      case Success(listOrder) => {
+        listOrder.foreach(o => orderRepository.updateStatusById(o.id, OrderStatus.PENDING.toString))
+        Ok(ResponseService.success())
+      }
+      case Failure(error: Error) =>
+        Ok(ResponseService.badRequest("order", Messages(error.toString)))
+
+    }
+  }
+
   def saveInfoReceiver() = Action { implicit request =>
     OrderFormFactory.orderReceiver.bindFromRequest.fold(
       errors => {
