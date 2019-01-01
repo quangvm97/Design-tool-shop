@@ -13,6 +13,10 @@ class ProductRepository @Inject() (
                                    ) extends AbstractRepository[Product, ProductRecord] {
   override protected val dao = productDao
 
+  def findProductById(id: Long): Try[Product] =  {
+    dao.findProductById(id).map(record2Entity)
+  }
+
   override def record2Entity(record: ProductRecord): Product = {
     Product(
       id                            = record.id,

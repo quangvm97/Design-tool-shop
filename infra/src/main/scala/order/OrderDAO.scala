@@ -18,8 +18,18 @@ class OrderDAO extends AbstractDao {
       .map(o => OrderRecord(o)).list().apply()
   }
 
-  def storeReceiver(userId: Long, name_receiver: String, number_phone: String, address: String)(implicit s: DBSession = AutoSession): Try[Int] = Try {
-    sql"UPDATE myapp.order SET name_receiver = name_receiver, number_phone = number_phone, address = address where user_id = user_id and status = 'DRAFT'"
+  def storeReceiver(userId: Long, name: String, phone: String, address: String)(implicit s: DBSession = AutoSession): Try[Int] = Try {
+    sql"UPDATE myapp.order SET name_receiver = ${name}, number_phone = ${phone}, address = ${address} where user_id = ${userId} and status = 'DRAFT'"
+      .updateAndReturnGeneratedKey().apply().toInt
+  }
+
+  def destroy(orderId: Long)(implicit s: DBSession = AutoSession): Try[Int] = Try {
+    sql"DELETE FROM myapp.order WHERE id = ${orderId}"
+      .updateAndReturnGeneratedKey().apply().toInt
+  }
+
+  def updateStatus(orderId: Long, status: String)(implicit s: DBSession = AutoSession): Try[Int] = Try {
+    sql"UPDATE myapp.order SET status = ${status} where id = ${orderId}"
       .updateAndReturnGeneratedKey().apply().toInt
   }
 
