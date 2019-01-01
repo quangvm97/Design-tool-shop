@@ -17,6 +17,10 @@ class OrderRepository @Inject() (orderDAO: OrderDAO) {
     dao.findOrderDraftByUserId(userId).get.map(record2Entity)
   }
 
+  def saveInfoReceiver(userId: Long, name: String, phone: String, number: String): Try[Int] = {
+    dao.storeReceiver(userId, name, phone, number)
+  }
+
   def record2Entity(record: OrderRecord): Order = {
     Order(
       id = record.id,

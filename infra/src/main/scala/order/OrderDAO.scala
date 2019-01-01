@@ -18,6 +18,11 @@ class OrderDAO extends AbstractDao {
       .map(o => OrderRecord(o)).list().apply()
   }
 
+  def storeReceiver(userId: Long, name_receiver: String, number_phone: String, address: String)(implicit s: DBSession = AutoSession): Try[Int] = Try {
+    sql"UPDATE myapp.order SET name_receiver = name_receiver, number_phone = number_phone, address = address where user_id = user_id and status = 'DRAFT'"
+      .updateAndReturnGeneratedKey().apply().toInt
+  }
+
   override def findByIdString(idString: String): Try[Nothing] = ???
 
   override def findAll: Try[Seq[Nothing]] = ???

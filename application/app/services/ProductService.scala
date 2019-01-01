@@ -3,7 +3,7 @@ package services
 import javax.inject.Inject
 import models.ProductRepository
 import models.Product
-import play.api.libs.json.{JsNumber, JsObject, JsString}
+import play.api.libs.json.{ JsNumber, JsObject, JsString }
 
 import scala.util.Try
 

@@ -8,11 +8,24 @@ case class OrderFormItem(
   productId: String,
   number: String)
 
+case class OrderReceiver(
+  userId: String,
+  name: String,
+  phone: String,
+  address: String)
+
 object OrderFormFactory {
   def orderItemForm: Form[OrderFormItem] = Form(
     mapping(
       "userId" -> nonEmptyText,
       "productId" -> nonEmptyText,
       "number" -> nonEmptyText)(OrderFormItem.apply)(OrderFormItem.unapply))
+
+  def orderReceiver: Form[OrderReceiver] = Form(
+    mapping(
+      "userId" -> nonEmptyText,
+      "name" -> nonEmptyText,
+      "phone" -> nonEmptyText,
+      "address" -> nonEmptyText)(OrderReceiver.apply)(OrderReceiver.unapply))
 }
 

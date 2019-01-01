@@ -56,5 +56,22 @@ class OrderController @Inject() (cc: ControllerComponents, orderRepository: Orde
 
     }
   }
+
+  def saveInfoReceiver() = Action { implicit request =>
+    print("here")
+    OrderFormFactory.orderReceiver.bindFromRequest.fold(
+      errors => {
+        Ok(ResponseService.badRequest(Some(errors.errorsAsJson)))
+      },
+      formData => {
+        orderRepository.saveInfoReceiver(formData.userId.toInt, formData.name, formData.phone, formData.address) match {
+          case Success(order) =>
+            Ok(ResponseService.success())
+          case Failure(error: Error) =>
+            Ok(ResponseService.badRequest("user", Messages(error.toString)))
+        }
+
+      })
+  }
 }
 
