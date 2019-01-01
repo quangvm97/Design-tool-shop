@@ -24,4 +24,4 @@ DELETE  /api/logout                     controllers.AuthController.logout()
 
 +nocsrf
 POST    /api/order                  controllers.OrderController.saveItemToCart()
-GET     /api/total                  controllers.OrderControl
+GET     /api/total/:id                  controllers.OrderController.payTotal(id:Long)

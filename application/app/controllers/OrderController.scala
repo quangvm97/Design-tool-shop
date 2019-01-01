@@ -44,11 +44,17 @@ class OrderController @Inject() (cc: ControllerComponents, orderRepository: Orde
       })
   }
 
-  def payTotal(id:Int) = Action { implicit request =>
-    var listOrder = orderRepository.findOrderDrafByUserId(id).get
-    var total = 0L
-    listOrder.foreach(order => total = total + (order.price + order.number))
-    Ok(ResponseService.success(data = Seq(listOrder.foreach(order => orderService.toJson(order)))))
+  def payTotal(id: Long) = Action { implicit request =>
+    orderRepository.findOrderDrafByUserId(id) match {
+      case Success(listOrder) => {
+        var total = 0L
+        listOrder.foreach(order => total = total + (order.price + order.number))
+        Ok(ResponseService.success(data = listOrder.map(orderService.toJson(_))))
+      }
+      case Failure(error: Error) =>
+        Ok(ResponseService.badRequest("order", Messages(error.toString)))
+
+    }
   }
 }
 
