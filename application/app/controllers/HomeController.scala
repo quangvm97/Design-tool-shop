@@ -17,7 +17,7 @@ class HomeController @Inject() (cc: ControllerComponents) extends AbstractContro
    * a path of `/`.
    */
   def index = Action {
-    Ok("hihi")
+    Ok("Welcome to Design Tool Shop")
   }
 
 }
