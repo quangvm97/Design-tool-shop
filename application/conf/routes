@@ -20,4 +20,11 @@ POST    /api/user                       controllers.AuthController.create()
 
 DELETE  /api/logout                     controllers.AuthController.logout()
 
+
+#Product
 GET     /api/product                    controllers.ProductController.findAll()
+
+#Order
++nocsrf
+POST    /api/order                  controllers.OrderController.saveItemToCart()
+GET     /api/total/:id                  controllers.OrderController.payTotal(id:Long)
