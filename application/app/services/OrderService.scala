@@ -2,6 +2,7 @@ package services
 
 import com.google.inject.Inject
 import order.{ Order, OrderRepository }
+import models.Product
 import play.api.libs.json.{ JsObject, JsString }
 
 class OrderService @Inject() (
@@ -13,5 +14,20 @@ class OrderService @Inject() (
     "number" -> JsString(order.number.toString()),
     "status" -> JsString(order.status.toString),
     "product_id" -> JsString(order.productId.toString)
+  ))
+
+
+  def toJsonWithProduct(order: Order, product: Product): JsObject = JsObject(Seq(
+    "id" -> JsString(order.id.toString()),
+    "price" -> JsString(product.price.toString()),
+    "number" -> JsString(order.number.toString()),
+    "status" -> JsString(order.status.toString),
+    "product_id" -> JsString(order.productId.toString),
+    "image" -> JsString(product.image),
+    "nameProduct" -> JsString(product.name),
+    "description" -> JsString(product.description),
+    "nameReceiver" -> JsString(order.receiver.name),
+    "phone" -> JsString(order.receiver.numberPhone),
+    "address" -> JsString(order.receiver.address)
   ))
 }

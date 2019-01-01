@@ -16,6 +16,11 @@ class ProductDao extends AbstractDao[ProductRecord] {
       .map(ProductRecord(p)).list().apply()
   }
 
+  def findProductById(id: Long): Try[ProductRecord] = Try {
+    sql"select id, name, image, description, price from myapp.product where id = ${id}"
+      .map(o => ProductRecord(o)).single().apply().getOrElse(throw new Exception("Couldn't find product with id: " + id))
+  }
+
   override def store(t: ProductRecord): Try[ProductRecord] = ???
 
   override def updateRecord(t: ProductRecord): Try[Int] = ???

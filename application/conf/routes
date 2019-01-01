@@ -28,3 +28,7 @@ GET     /api/product                    controllers.ProductController.findAll()
 +nocsrf
 POST    /api/order                  controllers.OrderController.saveItemToCart()
 GET     /api/total/:id                  controllers.OrderController.payTotal(id:Long)
+GET     /api/order/delete/:id           controllers.OrderController.removeOrder(id: Long)
+#Receiver
++nocsrf
+POST    /api/receiver               controllers.OrderController.saveInfoReceiver()
