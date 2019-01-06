@@ -101,8 +101,8 @@ class OrderController @Inject() (cc: ControllerComponents, orderRepository: Orde
     }
   }
 
-  def updateStatusAllUser(userId: Long) = Action { implicit request =>
-    orderRepository.findOrderDrafByUserId(userId) match {
+  def updateStatusByOrderId(orderId: Long) = Action { implicit request =>
+    orderRepository.updateStatusById(orderId, OrderStatus.PENDING.toString) match {
       case Success(value) => Ok(ResponseService.success())
       case Failure(error: Error) => Ok(ResponseService.badRequest("order", Messages(error.toString)))
     }
