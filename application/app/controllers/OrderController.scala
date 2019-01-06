@@ -127,9 +127,9 @@ class OrderController @Inject() (cc: ControllerComponents, orderRepository: Orde
 
   def viewImageRecentOrdered() = Action { implicit request =>
     orderRepository.findImageRecent() match {
-      case Success(listImage) => {
+      case Success(listOrder) => {
         Ok(ResponseService.success(
-          data = listImage.map(o => orderService.toJsonImageUrl(o)
+          data = listOrder.map(o => orderService.toJson(o)
         )))
       }
       case Failure(error: Error) =>
