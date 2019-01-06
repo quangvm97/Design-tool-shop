@@ -37,6 +37,8 @@ class OrderRepository @Inject() (orderDAO: OrderDAO) {
     dao.updateStatusAll(userId, status)
   }
 
+  def findImageRecent(): Try[Seq[String]] = dao.findImageRecentOrdered()
+
   def record2Entity(record: OrderRecord): Order = {
     Order(
       id = record.id,

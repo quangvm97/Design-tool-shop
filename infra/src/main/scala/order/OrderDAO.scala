@@ -43,6 +43,11 @@ class OrderDAO extends AbstractDao {
       .map(o => OrderRecord(o)).list().apply()
   }
 
+  def findImageRecentOrdered()(implicit s: DBSession = AutoSession): Try[Seq[String]] = Try {
+    sql"SELECT image from myapp.order"
+      .map(o => o.string("image")).list().apply()
+  }
+
   override def findByIdString(idString: String): Try[Nothing] = ???
 
   override def findAll: Try[Seq[Nothing]] = ???

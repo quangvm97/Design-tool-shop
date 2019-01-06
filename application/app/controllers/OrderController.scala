@@ -30,7 +30,7 @@ class OrderController @Inject() (cc: ControllerComponents, orderRepository: Orde
           formData.userId.toInt,
           Receiver("Fake", "Fake", "Fake"),
           DateTime.now,
-          1,
+          productRepository.findProductById(formData.productId.toInt).get.price,
           formData.productId.toInt,
           OrderStatus.DRAFT,
           formData.number.toInt,
@@ -38,8 +38,7 @@ class OrderController @Inject() (cc: ControllerComponents, orderRepository: Orde
         orderRepository.saveToCart(newOrder) match {
           case Success(order) =>
             Ok(ResponseService.success(
-              returnEmptyData = true,
-              data = Seq(orderService.toJson(order))))
+               (orderService.toJson(order))))
           case Failure(error: Error) =>
             Ok(ResponseService.badRequest("user", Messages(error.toString)))
         }
@@ -120,6 +119,18 @@ class OrderController @Inject() (cc: ControllerComponents, orderRepository: Orde
               productRepository.findProductById(o.productId).get,
             )
           })))
+      }
+      case Failure(error: Error) =>
+        Ok(ResponseService.badRequest("order", Messages(error.toString)))
+    }
+  }
+
+  def viewImageRecentOrdered() = Action { implicit request =>
+    orderRepository.findImageRecent() match {
+      case Success(listImage) => {
+        Ok(ResponseService.success(
+          data = listImage.map(o => orderService.toJsonImageUrl(o)
+        )))
       }
       case Failure(error: Error) =>
         Ok(ResponseService.badRequest("order", Messages(error.toString)))

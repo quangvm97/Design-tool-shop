@@ -32,6 +32,7 @@ GET     /api/order/delete/:id           controllers.OrderController.removeOrder(
 GET     /api/order/confirmBuy/:id          controllers.OrderController.confirmBuy(id:Long)
 GET     /api/order/updatePending/:id     controllers.OrderController.updateStatusByOrderId(id: Long)
 GET     /api/order/history/:id            controllers.OrderController.viewHistoryByUserId(id: Long)
+GET     /api/order/imageRecent            controllers.OrderController.viewImageRecentOrdered()
 
 #Receiver
 +nocsrf
