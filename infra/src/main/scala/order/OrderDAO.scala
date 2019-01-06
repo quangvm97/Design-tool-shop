@@ -12,7 +12,7 @@ class OrderDAO extends AbstractDao {
       .updateAndReturnGeneratedKey().apply().toInt
     order.copy(id = id)
   }
-
+  //order was in cart prepare to buy
   def findOrderDraftByUserId(id: Long)(implicit s: DBSession = AutoSession): Try[Seq[OrderRecord]] = Try {
     sql"SELECT * from myapp.order where user_id = ${id} and status = 'DRAFT' "
       .map(o => OrderRecord(o)).list().apply()
@@ -36,6 +36,11 @@ class OrderDAO extends AbstractDao {
   def updateStatusAll(userId: Long, status: String)(implicit s: DBSession = AutoSession): Try[Int] = Try {
     sql"UPDATE myapp.order SET status = ${status} where user_id = ${userId}"
       .updateAndReturnGeneratedKey().apply().toInt
+  }
+  //view history
+  def findAllOrderByUserId(id: Long)(implicit s: DBSession = AutoSession): Try[Seq[OrderRecord]] = Try {
+    sql"SELECT * from myapp.order where user_id = ${id}"
+      .map(o => OrderRecord(o)).list().apply()
   }
 
   override def findByIdString(idString: String): Try[Nothing] = ???
