@@ -6,7 +6,8 @@ import play.api.data.Forms._
 case class OrderFormItem(
   userId: String,
   productId: String,
-  number: String)
+  number: String,
+  url: String)
 
 case class OrderReceiver(
   userId: String,
@@ -19,7 +20,8 @@ object OrderFormFactory {
     mapping(
       "userId" -> nonEmptyText,
       "productId" -> nonEmptyText,
-      "number" -> nonEmptyText)(OrderFormItem.apply)(OrderFormItem.unapply))
+      "number" -> nonEmptyText,
+      "url" -> nonEmptyText)(OrderFormItem.apply)(OrderFormItem.unapply))
 
   def orderReceiver: Form[OrderReceiver] = Form(
     mapping(

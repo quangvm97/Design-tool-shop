@@ -8,7 +8,7 @@ import scala.util.Try
 class OrderDAO extends AbstractDao {
 
   def store(order: OrderRecord)(implicit s: DBSession = AutoSession): Try[OrderRecord] = Try {
-    val id = sql"INSERT INTO myapp.order (user_id, name_receiver,number_phone,address,created_at,price,product_id, status, number) VALUES (${order.userId}, ${order.nameReciver}, ${order.numberPhone}, ${order.address},${order.createdAt}, ${order.price}, ${order.productId}, ${order.status}, ${order.number})"
+    val id = sql"INSERT INTO myapp.order (user_id, name_receiver,number_phone,address,created_at,price,product_id, status, number, image) VALUES (${order.userId}, ${order.nameReciver}, ${order.numberPhone}, ${order.address},${order.createdAt}, ${order.price}, ${order.productId}, ${order.status}, ${order.number}, ${order.url})"
       .updateAndReturnGeneratedKey().apply().toInt
     order.copy(id = id)
   }
