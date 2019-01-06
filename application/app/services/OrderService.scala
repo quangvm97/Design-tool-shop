@@ -13,7 +13,8 @@ class OrderService @Inject() (
     "price" -> JsString(order.price.toString()),
     "number" -> JsString(order.number.toString()),
     "status" -> JsString(order.status.toString),
-    "product_id" -> JsString(order.productId.toString)
+    "product_id" -> JsString(order.productId.toString),
+    "image" -> JsString(order.url)
   ))
 
 
