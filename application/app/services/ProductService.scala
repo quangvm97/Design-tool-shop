@@ -1,16 +1,16 @@
 package services
 
 import javax.inject.Inject
-import models.{Product, ProductRepository, ProductTemplateRepository, ProductTemplate}
-import play.api.libs.json.{JsNumber, JsObject, JsString}
+import models.{ Product, ProductRepository, ProductTemplateRepository, ProductTemplate }
+import play.api.libs.json.{ JsNumber, JsObject, JsString }
 
 import scala.util.Try
 
 class ProductService @Inject() (
   productRepository: ProductRepository,
-  productTemplateRepository: ProductTemplateRepository                             ) {
+  productTemplateRepository: ProductTemplateRepository) {
   def toJsonList(product: Seq[Product]): Seq[JsObject] = {
-    product.map(row => {toJson(row, productTemplateRepository.findProductTemplateByProductId(row.id).get)})
+    product.map(row => { toJson(row, productTemplateRepository.findProductTemplateByProductId(row.id).get) })
   }
 
   def toJson(product: Product, productTemplate: ProductTemplate): JsObject = JsObject(Seq(
@@ -25,8 +25,7 @@ class ProductService @Inject() (
     "right" -> JsString(productTemplate.right.toString),
     "left" -> JsString(productTemplate.left.toString),
     "top" -> JsString(productTemplate.top.toString),
-    "bottom" -> JsString(productTemplate.top.toString)
-  ))
+    "bottom" -> JsString(productTemplate.top.toString)))
 
   def findAll(): Try[Seq[Product]] = productRepository.findAll
 }

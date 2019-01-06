@@ -8,7 +8,7 @@ import scala.util.Try
 class ProductTemplateDao extends AbstractDao {
 
   def findByProductId(id: Long)(implicit s: DBSession = AutoSession): Try[ProductTemplateRecord] = Try {
-    sql"SELECT * from myapp.order where user_id = ${id} and status = 'DRAFT' "
+    sql"SELECT * from myapp.product_template where product_id = ${id}"
       .map(o => ProductTemplateRecord(o)).single().apply().getOrElse(throw new Exception("Couldn't find product with id: " + id))
   }
 

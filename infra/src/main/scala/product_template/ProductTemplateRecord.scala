@@ -23,10 +23,10 @@ object ProductTemplateRecord extends SQLSyntaxSupport[ProductTemplateRecord] {
     width = rs.long("width"),
     height = rs.long("height"),
     url = rs.string(columnLabel = "url"),
+    right = rs.long(columnLabel = "right"),
     left = rs.long(columnLabel = "left"),
     top = rs.long(columnLabel = "top"),
-    bottom = rs.long(columnLabel = "bottom"),
-    right = rs.long(columnLabel = "right"))
+    bottom = rs.long(columnLabel = "bottom"))
 
 }
 
