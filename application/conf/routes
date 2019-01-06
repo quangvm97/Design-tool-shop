@@ -31,6 +31,8 @@ GET     /api/total/:id                  controllers.OrderController.payTotal(id:
 GET     /api/order/delete/:id           controllers.OrderController.removeOrder(id: Long)
 GET     /api/order/confirmBuy/:id          controllers.OrderController.confirmBuy(id:Long)
 GET     /api/order/updatePending/:id     controllers.OrderController.updateStatusByOrderId(id: Long)
+GET     /api/order/history/:id            controllers.OrderController.viewHistoryByUserId(id: Long)
+
 #Receiver
 +nocsrf
 POST    /api/receiver               controllers.OrderController.saveInfoReceiver()

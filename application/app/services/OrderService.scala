@@ -17,7 +17,7 @@ class OrderService @Inject() (
   ))
 
 
-  def toJsonWithProduct(order: Order, product: Product, productTemplate: ProductTemplate): JsObject = JsObject(Seq(
+  def toJsonWithProduct(order: Order, product: Product): JsObject = JsObject(Seq(
     "id" -> JsString(order.id.toString()),
     "price" -> JsString(product.price.toString()),
     "number" -> JsString(order.number.toString()),
@@ -28,14 +28,6 @@ class OrderService @Inject() (
     "description" -> JsString(product.description),
     "nameReceiver" -> JsString(order.receiver.name),
     "phone" -> JsString(order.receiver.numberPhone),
-    "address" -> JsString(order.receiver.address),
-    "product_template_id" -> JsString(productTemplate.id.toString),
-    "width" -> JsString(productTemplate.width.toString),
-    "height" -> JsString(productTemplate.width.toString),
-    "url" -> JsString(productTemplate.url),
-    "right" -> JsString(productTemplate.right.toString),
-    "left" -> JsString(productTemplate.left.toString),
-    "top" -> JsString(productTemplate.top.toString),
-    "bottom" -> JsString(productTemplate.top.toString)
+    "address" -> JsString(order.receiver.address)
   ))
 }

@@ -58,7 +58,7 @@ class OrderController @Inject() (cc: ControllerComponents, orderRepository: Orde
             orderService.toJsonWithProduct(
               o,
               productRepository.findProductById(o.productId).get,
-              productTemplateRepository.findProductTemplateByProductId(o.productId).get)
+              )
           })))
       }
       case Failure(error: Error) =>
@@ -106,6 +106,23 @@ class OrderController @Inject() (cc: ControllerComponents, orderRepository: Orde
     orderRepository.updateStatusById(orderId, OrderStatus.PENDING.toString) match {
       case Success(value) => Ok(ResponseService.success())
       case Failure(error: Error) => Ok(ResponseService.badRequest("order", Messages(error.toString)))
+    }
+  }
+
+  def viewHistoryByUserId(userId: Long) = Action { implicit request =>
+    orderRepository.findAllOrderByUserId(userId) match {
+      case Success(listOrder) => {
+        Ok(ResponseService.success(
+          returnEmptyData = true,
+          data = listOrder.map(o => {
+            orderService.toJsonWithProduct(
+              o,
+              productRepository.findProductById(o.productId).get,
+            )
+          })))
+      }
+      case Failure(error: Error) =>
+        Ok(ResponseService.badRequest("order", Messages(error.toString)))
     }
   }
 
