@@ -29,6 +29,10 @@ class OrderRepository @Inject() (orderDAO: OrderDAO) {
     dao.updateStatus(orderId, status)
   }
 
+  def updateStatusByUserId(userId: Long, status: String): Try[Int] = {
+    dao.updateStatusAll(userId, status)
+  }
+
   def record2Entity(record: OrderRecord): Order = {
     Order(
       id = record.id,

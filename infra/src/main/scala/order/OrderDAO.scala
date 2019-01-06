@@ -33,6 +33,11 @@ class OrderDAO extends AbstractDao {
       .updateAndReturnGeneratedKey().apply().toInt
   }
 
+  def updateStatusAll(userId: Long, status: String)(implicit s: DBSession = AutoSession): Try[Int] = Try {
+    sql"UPDATE myapp.order SET status = ${status} where user_id = ${userId}"
+      .updateAndReturnGeneratedKey().apply().toInt
+  }
+
   override def findByIdString(idString: String): Try[Nothing] = ???
 
   override def findAll: Try[Seq[Nothing]] = ???
