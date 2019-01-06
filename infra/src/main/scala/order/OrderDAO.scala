@@ -25,7 +25,7 @@ class OrderDAO extends AbstractDao {
 
   def destroy(orderId: Long)(implicit s: DBSession = AutoSession): Try[Int] = Try {
     sql"DELETE FROM myapp.order WHERE id = ${orderId}"
-      .updateAndReturnGeneratedKey().apply().toInt
+      .update.apply()
   }
 
   def updateStatus(orderId: Long, status: String)(implicit s: DBSession = AutoSession): Try[Int] = Try {
