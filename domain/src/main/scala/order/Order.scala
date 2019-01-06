@@ -20,7 +20,8 @@ case class Order(
                 price: Long,
                 productId: Long,
                 status: OrderStatus.Value,
-                number: Long
+                number: Long,
+                url: String
                 )  {
 
 }

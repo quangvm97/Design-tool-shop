@@ -42,7 +42,8 @@ class OrderRepository @Inject() (orderDAO: OrderDAO) {
       price = record.price,
       productId = record.productId,
       status = OrderStatus.withName(record.status),
-      number = record.number)
+      number = record.number,
+      url = record.url)
   }
 
   def entity2Record(entity: Order): OrderRecord = {
@@ -56,7 +57,8 @@ class OrderRepository @Inject() (orderDAO: OrderDAO) {
       price = entity.price,
       productId = entity.productId,
       status = entity.status.toString,
-      number = entity.number)
+      number = entity.number,
+      url = entity.url)
   }
 }
 
