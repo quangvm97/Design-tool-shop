@@ -25,11 +25,16 @@ class OrderDAO extends AbstractDao {
 
   def destroy(orderId: Long)(implicit s: DBSession = AutoSession): Try[Int] = Try {
     sql"DELETE FROM myapp.order WHERE id = ${orderId}"
-      .updateAndReturnGeneratedKey().apply().toInt
+      .update.apply()
   }
 
   def updateStatus(orderId: Long, status: String)(implicit s: DBSession = AutoSession): Try[Int] = Try {
     sql"UPDATE myapp.order SET status = ${status} where id = ${orderId}"
+      .updateAndReturnGeneratedKey().apply().toInt
+  }
+
+  def updateStatusAll(userId: Long, status: String)(implicit s: DBSession = AutoSession): Try[Int] = Try {
+    sql"UPDATE myapp.order SET status = ${status} where user_id = ${userId}"
       .updateAndReturnGeneratedKey().apply().toInt
   }
 

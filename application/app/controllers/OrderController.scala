@@ -2,7 +2,7 @@ package controllers
 import applications.services.AbstractSecured
 import forms.orders.OrderFormFactory
 import javax.inject.Inject
-import models.{ ProductRepository, UserRepository }
+import models.{ ProductRepository, ProductTemplateRepository, UserRepository }
 import order.{ Order, OrderRepository, OrderStatus, Receiver }
 import org.joda.time.DateTime
 import play.api.i18n.Messages
@@ -11,7 +11,7 @@ import services.{ OrderService, ResponseService }
 
 import scala.util.{ Failure, Success }
 
-class OrderController @Inject() (cc: ControllerComponents, orderRepository: OrderRepository, orderService: OrderService, userRepository: UserRepository, productRepository: ProductRepository) extends AbstractSecured(userRepository, cc) {
+class OrderController @Inject() (cc: ControllerComponents, orderRepository: OrderRepository, orderService: OrderService, userRepository: UserRepository, productRepository: ProductRepository, productTemplateRepository: ProductTemplateRepository) extends AbstractSecured(userRepository, cc) {
 
   /**
    * Create an Action to render an HTML page with a welcome message.
@@ -36,7 +36,9 @@ class OrderController @Inject() (cc: ControllerComponents, orderRepository: Orde
           formData.number.toInt)
         orderRepository.saveToCart(newOrder) match {
           case Success(order) =>
-            Ok(ResponseService.success(data = Seq(orderService.toJson(order))))
+            Ok(ResponseService.success(
+              returnEmptyData = true,
+              data = Seq(orderService.toJson(order))))
           case Failure(error: Error) =>
             Ok(ResponseService.badRequest("user", Messages(error.toString)))
         }
@@ -50,7 +52,13 @@ class OrderController @Inject() (cc: ControllerComponents, orderRepository: Orde
         var total = 0L
         listOrder.foreach(order => total = total + (order.price + order.number))
         Ok(ResponseService.success(
-          data = listOrder.map(o => orderService.toJsonWithProduct(o, productRepository.findProductById(o.productId).get))))
+          returnEmptyData = true,
+          data = listOrder.map(o => {
+            orderService.toJsonWithProduct(
+              o,
+              productRepository.findProductById(o.productId).get,
+              productTemplateRepository.findProductTemplateByProductId(o.productId).get)
+          })))
       }
       case Failure(error: Error) =>
         Ok(ResponseService.badRequest("order", Messages(error.toString)))
@@ -88,6 +96,13 @@ class OrderController @Inject() (cc: ControllerComponents, orderRepository: Orde
 
   def removeOrder(orderId: Long) = Action { implicit request =>
     orderRepository.remove(orderId) match {
+      case Success(value) => Ok(ResponseService.success())
+      case Failure(error: Error) => Ok(ResponseService.badRequest("order", Messages(error.toString)))
+    }
+  }
+
+  def updateStatusByOrderId(orderId: Long) = Action { implicit request =>
+    orderRepository.updateStatusById(orderId, OrderStatus.PENDING.toString) match {
       case Success(value) => Ok(ResponseService.success())
       case Failure(error: Error) => Ok(ResponseService.badRequest("order", Messages(error.toString)))
     }
