@@ -21,7 +21,7 @@ class ProductService @Inject() (
     "price" -> JsNumber(product.price),
     "item" -> JsObject(Seq(
       "width" -> JsString(productTemplate.width.toString),
-      "height" -> JsString(productTemplate.width.toString),
+      "height" -> JsString(productTemplate.height.toString),
       "url" -> JsString(productTemplate.url),
       "right" -> JsString(productTemplate.right.toString),
       "left" -> JsString(productTemplate.left.toString),
