@@ -19,13 +19,14 @@ class ProductService @Inject() (
     "image" -> JsString(product.image),
     "description" -> JsString(product.description),
     "price" -> JsNumber(product.price),
-    "width" -> JsString(productTemplate.width.toString),
-    "height" -> JsString(productTemplate.width.toString),
-    "url" -> JsString(productTemplate.url),
-    "right" -> JsString(productTemplate.right.toString),
-    "left" -> JsString(productTemplate.left.toString),
-    "top" -> JsString(productTemplate.top.toString),
-    "bottom" -> JsString(productTemplate.top.toString)))
+    "item" -> JsObject(Seq(
+      "width" -> JsString(productTemplate.width.toString),
+      "height" -> JsString(productTemplate.width.toString),
+      "url" -> JsString(productTemplate.url),
+      "right" -> JsString(productTemplate.right.toString),
+      "left" -> JsString(productTemplate.left.toString),
+      "top" -> JsString(productTemplate.top.toString),
+      "bottom" -> JsString(productTemplate.top.toString)))))
 
   def findAll(): Try[Seq[Product]] = productRepository.findAll
 }
