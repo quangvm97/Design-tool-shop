@@ -32,7 +32,8 @@ class OrderService @Inject() (
     "description" -> JsString(product.description),
     "nameReceiver" -> JsString(order.receiver.name),
     "phone" -> JsString(order.receiver.numberPhone),
-    "address" -> JsString(order.receiver.address)
+    "address" -> JsString(order.receiver.address),
+    "url" -> JsString(order.url)
   ))
 
   def toJsonImageUrl(url: String) : JsObject = JsObject(Seq(

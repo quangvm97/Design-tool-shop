@@ -28,7 +28,7 @@ class OrderController @Inject() (cc: ControllerComponents, orderRepository: Orde
         val newOrder = Order(
           0,
           formData.userId.toInt,
-          Receiver("Fake", "Fake", "Fake"),
+          Receiver("", "", ""),
           DateTime.now,
           productRepository.findProductById(formData.productId.toInt).get.price,
           formData.productId.toInt,
