@@ -60,7 +60,7 @@ class AuthController @Inject() (
           createUserForm.password)
         userService.insert(newUser) match {
           case Success(user) =>
-            Ok(ResponseService.success(data = Seq(userService.toJson(newUser))))
+            Ok(ResponseService.success(userService.toJson(newUser)))
               .withSession(Security.username -> newUser.email)
           case Failure(_) =>
             Ok(ResponseService.badRequest("user", Messages("error.duplicate")))

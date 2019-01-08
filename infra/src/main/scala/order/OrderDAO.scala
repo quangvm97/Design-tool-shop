@@ -39,12 +39,12 @@ class OrderDAO extends AbstractDao {
   }
   //view history
   def findAllOrderByUserId(id: Long)(implicit s: DBSession = AutoSession): Try[Seq[OrderRecord]] = Try {
-    sql"SELECT * from myapp.order where user_id = ${id}"
+    sql"SELECT * from myapp.order where user_id = ${id} and status != 'DRAFT'"
       .map(o => OrderRecord(o)).list().apply()
   }
 
   def findRecentOrdered(id : Long)(implicit s: DBSession = AutoSession): Try[Seq[OrderRecord]] = Try {
-    sql"SELECT * from myapp.order where user_id =${id}"
+    sql"SELECT * from myapp.order where user_id != ${id}"
       .map(o => OrderRecord(o)).list().apply()
   }
 
