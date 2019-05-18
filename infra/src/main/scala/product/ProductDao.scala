@@ -21,7 +21,11 @@ class ProductDao extends AbstractDao[ProductRecord] {
       .map(o => ProductRecord(o)).single().apply().getOrElse(throw new Exception("Couldn't find product with id: " + id))
   }
 
-  override def store(t: ProductRecord): Try[ProductRecord] = ???
+  override def store(t: ProductRecord): Try[ProductRecord] = Try {
+    val id = sql"insert into myapp.product(id, name, image, description, price) values (${t.id}, ${t.name}, ${t.image}, ${t.description}, ${t.price})"
+      .updateAndReturnGeneratedKey().apply().toInt
+    t.copy(id = id)
+  }
 
   override def updateRecord(t: ProductRecord): Try[Int] = ???
 

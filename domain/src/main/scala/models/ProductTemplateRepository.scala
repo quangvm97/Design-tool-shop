@@ -11,6 +11,11 @@ class ProductTemplateRepository @Inject() (productTemplateDao: ProductTemplateDa
   def findProductTemplateByProductId(id: Long): Try[ProductTemplate] = {
     dao.findByProductId(id).map(record2Entity)
   }
+
+  def store(productTemplate: ProductTemplate): Try[ProductTemplate] = {
+    dao.store(entity2Record(productTemplate)).map(record2Entity)
+  }
+
   def record2Entity(record: ProductTemplateRecord): ProductTemplate = {
     models.ProductTemplate(
       id = record.id,
@@ -24,17 +29,16 @@ class ProductTemplateRepository @Inject() (productTemplateDao: ProductTemplateDa
       bottom = record.bottom)
   }
 
-  //  def entity2Record(entity: Order): OrderRecord = {
-  //    OrderRecord(
-  //      id = entity.id,
-  //      userId = entity.userId,
-  //      nameReciver = entity.receiver.name,
-  //      numberPhone = entity.receiver.numberPhone,
-  //      address = entity.receiver.address,
-  //      createdAt = entity.createdAt,
-  //      price = entity.price,
-  //      productId = entity.productId,
-  //      status = entity.status.toString,
-  //      number = entity.number)
-  //  }
+  def entity2Record(entity: ProductTemplate): ProductTemplateRecord = {
+    ProductTemplateRecord(
+      id = entity.id,
+      productId = entity.productId,
+      width = entity.width,
+      height = entity.height,
+      url = entity.url,
+      left = entity.left,
+      right = entity.right,
+      top = entity.top,
+      bottom = entity.bottom)
+  }
 }

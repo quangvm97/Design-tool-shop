@@ -27,6 +27,5 @@ object ProductTemplateRecord extends SQLSyntaxSupport[ProductTemplateRecord] {
     left = rs.long(columnLabel = "left"),
     top = rs.long(columnLabel = "top"),
     bottom = rs.long(columnLabel = "bottom"))
-
 }
 

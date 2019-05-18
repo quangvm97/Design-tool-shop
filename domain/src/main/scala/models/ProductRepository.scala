@@ -36,6 +36,8 @@ class ProductRepository @Inject() (
       price                           = entity.price)
   }
 
-
+  def store (newProduct: Product) : Try[Product] = {
+    dao.store(entity2Record(newProduct)).map(record2Entity)
+  }
 }
 

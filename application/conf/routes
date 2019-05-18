@@ -23,7 +23,7 @@ DELETE  /api/logout                     controllers.AuthController.logout()
 
 #Product
 GET     /api/product                    controllers.ProductController.findAll()
-
+POST    /api/product/create             controllers.ProductController.create()
 #Order
 +nocsrf
 POST    /api/order                  controllers.OrderController.saveItemToCart()
