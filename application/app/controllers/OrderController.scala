@@ -28,7 +28,7 @@ class OrderController @Inject() (cc: ControllerComponents, orderRepository: Orde
         val newOrder = Order(
           0,
           formData.userId.toInt,
-          Receiver("Fake", "Fake", "Fake"),
+          Receiver("", "", ""),
           DateTime.now,
           productRepository.findProductById(formData.productId.toInt).get.price,
           formData.productId.toInt,
@@ -125,8 +125,8 @@ class OrderController @Inject() (cc: ControllerComponents, orderRepository: Orde
     }
   }
 
-  def viewImageRecentOrdered() = Action { implicit request =>
-    orderRepository.findImageRecent() match {
+  def viewImageRecentOrdered(userId: Long) = Action { implicit request =>
+    orderRepository.findImageRecent(userId) match {
       case Success(listOrder) => {
         Ok(ResponseService.success(
           data = listOrder.map(o => orderService.toJson(o)

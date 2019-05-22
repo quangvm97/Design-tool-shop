@@ -14,7 +14,7 @@ class OrderService @Inject() (
     "number" -> JsString(order.number.toString()),
     "status" -> JsString(order.status.toString),
     "product_id" -> JsString(order.productId.toString),
-    "image" -> JsString(order.url)
+    "url" -> JsString(order.url)
   ))
 
 
@@ -23,13 +23,17 @@ class OrderService @Inject() (
     "price" -> JsString(product.price.toString()),
     "number" -> JsString(order.number.toString()),
     "status" -> JsString(order.status.toString),
+    "nameReveiver" -> JsString(order.receiver.name),
+    "phone" -> JsString(order.receiver.numberPhone),
+    "address" -> JsString(order.receiver.address),
     "product_id" -> JsString(order.productId.toString),
     "image" -> JsString(product.image),
     "nameProduct" -> JsString(product.name),
     "description" -> JsString(product.description),
     "nameReceiver" -> JsString(order.receiver.name),
     "phone" -> JsString(order.receiver.numberPhone),
-    "address" -> JsString(order.receiver.address)
+    "address" -> JsString(order.receiver.address),
+    "url" -> JsString(order.url)
   ))
 
   def toJsonImageUrl(url: String) : JsObject = JsObject(Seq(

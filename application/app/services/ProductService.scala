@@ -26,7 +26,7 @@ class ProductService @Inject() (
       "right" -> JsString(productTemplate.right.toString),
       "left" -> JsString(productTemplate.left.toString),
       "top" -> JsString(productTemplate.top.toString),
-      "bottom" -> JsString(productTemplate.top.toString)))))
+      "bottom" -> JsString(productTemplate.bottom.toString)))))
 
   def findAll(): Try[Seq[Product]] = productRepository.findAll
 }
