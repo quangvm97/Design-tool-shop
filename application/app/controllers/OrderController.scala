@@ -36,7 +36,7 @@ class OrderController @Inject() (cc: ControllerComponents, orderRepository: Orde
           formData.number.toInt,
           formData.url,
           formData.svg)
-        orderRepository.saveToCart(newOrder) match {
+          orderRepository.saveToCart(newOrder) match {
           case Success(order) =>
             Ok(ResponseService.success(
                (orderService.toJson(order))))
