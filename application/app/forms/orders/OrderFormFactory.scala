@@ -7,7 +7,8 @@ case class OrderFormItem(
   userId: String,
   productId: String,
   number: String,
-  url: Option[String])
+  url: String,
+  svg : Option[String])
 
 case class OrderReceiver(
   userId: String,
@@ -22,7 +23,7 @@ object OrderFormFactory {
       "productId" -> nonEmptyText,
       "number" -> nonEmptyText,
       "url" -> nonEmptyText,
-      "svg" -> text)(OrderFormItem.apply)(OrderFormItem.unapply))
+      "svg" -> optional(text))(OrderFormItem.apply)(OrderFormItem.unapply))
 
   def orderReceiver: Form[OrderReceiver] = Form(
     mapping(
