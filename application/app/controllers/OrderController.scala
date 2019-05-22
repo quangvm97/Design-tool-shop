@@ -34,7 +34,8 @@ class OrderController @Inject() (cc: ControllerComponents, orderRepository: Orde
           formData.productId.toInt,
           OrderStatus.DRAFT,
           formData.number.toInt,
-          formData.url)
+          formData.url,
+          formData.svg)
         orderRepository.saveToCart(newOrder) match {
           case Success(order) =>
             Ok(ResponseService.success(

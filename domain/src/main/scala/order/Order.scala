@@ -21,8 +21,8 @@ case class Order(
                 productId: Long,
                 status: OrderStatus.Value,
                 number: Long,
-                url: String
-                )  {
+                url: String,
+                svg: Option[String])  {
 
 }
 
