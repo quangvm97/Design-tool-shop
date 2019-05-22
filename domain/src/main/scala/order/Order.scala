@@ -22,7 +22,7 @@ case class Order(
                 status: OrderStatus.Value,
                 number: Long,
                 url: String,
-                svg: Option[String])  {
+                svg: String)  {
 
 }
 
