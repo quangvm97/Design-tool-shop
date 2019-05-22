@@ -51,7 +51,7 @@ class OrderRepository @Inject() (orderDAO: OrderDAO) {
       productId = record.productId,
       status = OrderStatus.withName(record.status),
       number = record.number,
-      url = record.url
+      url = record.url,
       svg = record.svg)
   }
 
