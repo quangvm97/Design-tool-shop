@@ -19,7 +19,7 @@ case class OrderRecord(
   status: String,
   number: Long,
   url: String,
-  svg: Option[String])
+  svg: String)
 
 object OrderRecord extends SQLSyntaxSupport[OrderRecord] {
   override val tableName = "order"
@@ -37,5 +37,5 @@ object OrderRecord extends SQLSyntaxSupport[OrderRecord] {
     status = rs.string("status"),
     number = rs.long("number"),
     url = rs.string("image"),
-    svg = rs.stringOpt("svg"))
+    svg = rs.string("svg"))
 }
